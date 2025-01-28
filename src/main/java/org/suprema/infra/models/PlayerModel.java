@@ -1,8 +1,6 @@
 package org.suprema.infra.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
 
 @Entity
 public class PlayerModel {
@@ -12,6 +10,9 @@ public class PlayerModel {
             name = "playerSeq",
             allocationSize = 1,
             initialValue = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.IDENTITY
     )
     private Long id;
     private String username;
@@ -25,6 +26,12 @@ public class PlayerModel {
         this.phone = phone;
         this.password = password;
     }
+
+    public PlayerModel() {
+
+    }
+
+
     public Long getId() {
         return id;
     }

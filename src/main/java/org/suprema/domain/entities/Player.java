@@ -6,12 +6,11 @@ public class Player {
     private String name;
     private String cpf;
 
-
     private String phone;
     private String password;
 
 
-    public Player(Long id, String username, String cpf, String phone, String password) {
+    public Player(String username, String cpf, String phone, String password) {
         this.id = id;
         this.username = username;
         this.cpf = cpf;

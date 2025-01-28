@@ -15,7 +15,6 @@ public class PlayerEntityMapper {
 
     Player toDomain(PlayerModel playerModelEntity) {
         return new Player(
-            playerModelEntity.getId(),
             playerModelEntity.getUsername(),
             playerModelEntity.getCpf(),
             playerModelEntity.getPhone(),
