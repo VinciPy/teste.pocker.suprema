@@ -17,4 +17,28 @@ public class PokerTableModel {
     @OneToMany(mappedBy = "pokerTable", cascade = CascadeType.ALL, orphanRemoval = false)
     private List<PlayerModel> players = new ArrayList<>();
 
+
+    public PokerTableModel() {
+
+    }
+    public PokerTableModel(Long id, List<PlayerModel> players) {
+        this.id = id;
+        this.players = players;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<PlayerModel> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<PlayerModel> players) {
+        this.players = players;
+    }
 }
