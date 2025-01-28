@@ -20,6 +20,10 @@ public class PlayerModel {
     private String phone;
     private String password;
 
+    @ManyToOne()
+    @JoinColumn(name = "poker_table_id")
+    private PokerTableModel pokerTable;
+
     public PlayerModel(String username, String cpf, String phone, String password) {
         this.username = username;
         this.cpf = cpf;

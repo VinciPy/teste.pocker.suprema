@@ -1,5 +1,6 @@
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/application/usecases/CreatePlayer/CreatePlayerInteractor.java
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/application/usecases/CreatePlayer/PlayerGateway.java
+/home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/constants/JWTIssuer.java
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/domain/entities/Player.java
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/domain/entities/PokerTable.java
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/infra/controllers/AuthDTO.java

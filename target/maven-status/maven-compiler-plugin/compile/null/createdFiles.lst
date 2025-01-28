@@ -1,4 +1,5 @@
 org/suprema/infra/controllers/AuthDTO.class
+org/suprema/constants/JWTIssuer.class
 org/suprema/infra/controllers/AuthResource.class
 org/suprema/infra/validations/UserValidationDTO.class
 org/suprema/infra/gateways/PlayerEntityMapper.class
