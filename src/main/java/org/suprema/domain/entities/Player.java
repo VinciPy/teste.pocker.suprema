@@ -5,8 +5,19 @@ public class Player {
     private String username;
     private String name;
     private String cpf;
+
+
     private String phone;
     private String password;
+
+
+    public Player(Long id, String username, String cpf, String phone, String password) {
+        this.id = id;
+        this.username = username;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.password = password;
+    }
 
     public Long getId() {
         return id;
