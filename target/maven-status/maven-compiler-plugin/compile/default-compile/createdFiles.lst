@@ -1,1 +1,8 @@
+org/suprema/infra/persistence/PlayerRepository.class
+org/suprema/domain/entities/PokerTable.class
+org/suprema/application/usecases/CreatePlayer/PlayerGateway.class
+org/suprema/application/usecases/CreatePlayer/CreatePlayerInteractor.class
+org/suprema/infra/models/PlayerModel.class
 org/acme/GreetingResource.class
+org/suprema/infra/gateways/PlayerRepositoryGateway.class
+org/suprema/domain/entities/Player.class
