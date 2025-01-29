@@ -21,8 +21,8 @@ public class PokerTableRepositoryGateway implements PokerTableGateway {
     @Override
     public PokerTable createPokerTable(PokerTable pokerTable) {
         PokerTableModel pokerTableModel = this.pokerTableEntityMapper.toModel(pokerTable);
-        this.pokerTableRepository.create(pokerTableModel);
-        return pokerTable;
+        PokerTableModel pokerTableSaved = this.pokerTableRepository.create(pokerTableModel);
+        return this.pokerTableEntityMapper.toDomain(pokerTableSaved);
     }
 
     @Override
@@ -33,9 +33,10 @@ public class PokerTableRepositoryGateway implements PokerTableGateway {
 
     @Override
     public PokerTable save(PokerTable pokerTable) {
-        PokerTableModel pokerTableModel = this.pokerTableEntityMapper.toModel(pokerTable);
-        this.pokerTableRepository.getEntityManager().merge(pokerTableModel);
         PokerTableModel pokerTableSaved = this.pokerTableRepository.findById(pokerTable.getId());
-        return this.pokerTableEntityMapper.toDomain(pokerTableModel);
+        PokerTableModel pokerTableModel = this.pokerTableEntityMapper.toModel(pokerTable);
+        pokerTableSaved.setPlayers(pokerTableModel.getPlayers());
+        this.pokerTableRepository.persist(pokerTableSaved);
+        return pokerTable;
     }
 }

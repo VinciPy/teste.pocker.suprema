@@ -29,9 +29,7 @@ public class AddPlayerInteractor {
         }
         PokerTable pokerTable = pokerTableExists.get();
         Player player = playerExists.get();
-//        pokerTable.addPlayer(player);
         player.setPokerTable(pokerTable);
-        this.pokerTableGateway.save(pokerTable);
         this.playerGateway.save(player);
         return pokerTable;
     }

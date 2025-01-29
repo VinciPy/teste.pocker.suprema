@@ -14,9 +14,11 @@ import org.suprema.application.usecases.CreatePokerTable.CreatePokerTableInterac
 import org.suprema.application.usecases.CreatePokerTable.PokerTableGateway;
 import org.suprema.application.usecases.SimulateWinner.SimulateWinnerInteractor;
 import org.suprema.domain.entities.Player;
+import org.suprema.domain.entities.PokerTable;
 import org.suprema.infra.gateways.PlayerEntityMapper;
 import org.suprema.infra.gateways.PlayerRepositoryGateway;
 import org.suprema.infra.gateways.PokerTableRepositoryGateway;
+import org.suprema.infra.models.PokerTableModel;
 import org.suprema.infra.persistence.PlayerRepository;
 import org.suprema.infra.persistence.PokerTableRepository;
 import org.suprema.infra.validations.PokerTableValidationDTO;
@@ -58,8 +60,10 @@ public class PokerTableResource {
     public Response create(PokerTableValidationDTO data) {
         Set<ConstraintViolation<PokerTableValidationDTO>> violations = validator.validate(data);
         if (violations.isEmpty()) {
-            this.createPokerTableInteractor.createPokerTable(this.pokerTableDTOMapper.toPokerTableDomain(data));
-            return Response.status(201).build();
+            PokerTable pokerTable = this.createPokerTableInteractor.createPokerTable(this.pokerTableDTOMapper.toPokerTableDomain(data));
+            System.out.println(pokerTable.getId() + "-----");
+            CreatePokerTableResponse reponse = new CreatePokerTableResponse(String.valueOf(pokerTable.getId()));
+            return Response.ok(reponse).status(201).build();
         } else {
             Result result = new Result(violations);
             return Response.status(400).entity(result).build();
