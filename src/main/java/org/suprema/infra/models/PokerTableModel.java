@@ -12,7 +12,14 @@ public class PokerTableModel {
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE
     )
+    @SequenceGenerator(
+            name = "tablePokerSeq",
+            allocationSize = 1,
+            initialValue = 1
+    )
     private Long id;
+
+    private String name;
 
     @OneToMany(mappedBy = "pokerTable", cascade = CascadeType.ALL, orphanRemoval = false)
     private List<PlayerModel> players = new ArrayList<>();
@@ -21,8 +28,9 @@ public class PokerTableModel {
     public PokerTableModel() {
 
     }
-    public PokerTableModel(Long id, List<PlayerModel> players) {
+    public PokerTableModel(Long id, String name, List<PlayerModel> players) {
         this.id = id;
+        this.name = name;
         this.players = players;
     }
 
@@ -40,5 +48,13 @@ public class PokerTableModel {
 
     public void setPlayers(List<PlayerModel> players) {
         this.players = players;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

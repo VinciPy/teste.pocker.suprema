@@ -22,7 +22,8 @@ public class PokerTableEntityMapper {
                 .map(player -> this.playerEntityMapper.toDomain(player))
                 .collect(Collectors.toSet());
         PokerTable pokerTable = new PokerTable(
-              players
+                pokerTableModel.getName(),
+                players
         );
         return pokerTable;
     };
@@ -34,6 +35,7 @@ public class PokerTableEntityMapper {
                 .collect(Collectors.toList());
         PokerTableModel pokerTableModel = new PokerTableModel(
             pokerTable.getId(),
+            pokerTable.getName(),
             playersModel
         );
         return pokerTableModel;

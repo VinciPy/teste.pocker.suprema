@@ -7,7 +7,8 @@ public class PokerTable {
     private String name;
     private Set<Player> players;
 
-    public PokerTable(Set<Player> players) {
+    public PokerTable(String name, Set<Player> players) {
+        this.name = name;
         this.players = players;
     }
 

@@ -1,6 +1,13 @@
 org/suprema/infra/controllers/AuthDTO.class
-org/suprema/constants/JWTIssuer.class
+org/suprema/infra/models/PokerTableModel.class
 org/suprema/infra/controllers/AuthResource.class
+org/suprema/infra/persistence/PokerTableRepository.class
+org/suprema/infra/gateways/PokerTableRepositoryGateway.class
 org/suprema/infra/validations/UserValidationDTO.class
 org/suprema/infra/gateways/PlayerEntityMapper.class
+org/suprema/infra/controllers/PokerTableDTOMapper.class
 org/suprema/infra/controllers/UserResource.class
+org/suprema/constants/JWTIssuer.class
+org/suprema/application/usecases/CreatePokerTable/PokerTableGateway.class
+org/suprema/application/usecases/CreatePokerTable/CreatePokerTableInteractor.class
+org/suprema/infra/gateways/PokerTableEntityMapper.class
