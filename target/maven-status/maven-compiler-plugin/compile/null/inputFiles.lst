@@ -10,6 +10,7 @@
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/infra/controllers/AddPlayerDTOValidation.java
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/infra/controllers/AuthDTO.java
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/infra/controllers/AuthResource.java
+/home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/infra/controllers/CreatePokerTableResponse.java
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/infra/controllers/PlayerDTOMapper.java
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/infra/controllers/PokerTableDTOMapper.java
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/infra/controllers/PokerTableResource.java

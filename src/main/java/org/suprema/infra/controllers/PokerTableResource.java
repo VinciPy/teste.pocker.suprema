@@ -100,7 +100,11 @@ public class PokerTableResource {
     @POST
     public Response calculateWinner(@PathParam("tableId") Long tableId) {
         Player playerWinner = this.simulateWinnerInteractor.calculateWinner(tableId);
-        return Response.status(200).entity(playerWinner).build();
+        PlayerWinnerReponse playerWinnerReponse = new PlayerWinnerReponse(
+                playerWinner.getUsername(),
+                playerWinner.getId()
+        );
+        return Response.status(200).entity(playerWinnerReponse).build();
     }
 
 }
