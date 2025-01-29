@@ -5,6 +5,8 @@ import org.suprema.domain.entities.Player;
 import org.suprema.infra.models.PlayerModel;
 import org.suprema.infra.persistence.PlayerRepository;
 
+import java.util.Optional;
+
 public class PlayerRepositoryGateway implements PlayerGateway {
     private final PlayerRepository playerRepository;
     private final PlayerEntityMapper playerEntityMapper;
@@ -20,5 +22,11 @@ public class PlayerRepositoryGateway implements PlayerGateway {
         PlayerModel created = this.playerRepository.create(playerModelConverted);
         Player entityConverted = this.playerEntityMapper.toDomain(created);
         return entityConverted;
+    }
+
+    @Override
+    public Optional<Player> findById(Long id) {
+        PlayerModel player = this.playerRepository.findById(id);
+        return Optional.ofNullable(this.playerEntityMapper.toDomain(player));
     }
 }
