@@ -36,15 +36,13 @@ public class PokerTable {
         this.players = players;
     }
 
-    // Método para adicionar um jogador à mesa
     public boolean addPlayer(Player player) {
         if (players.size() >= 8) {
-            return false; // Mesa já cheia
+            return false;
         }
         return players.add(player);
     }
 
-    // Verifica se a mesa tem no mínimo 3 jogadores
     public boolean isValidTable() {
         return players.size() >= 3;
     }

@@ -25,6 +25,7 @@ public class PokerTableEntityMapper {
                 pokerTableModel.getName(),
                 players
         );
+        pokerTable.setId(pokerTableModel.getId());
         return pokerTable;
     };
 

@@ -5,10 +5,18 @@ public class Player {
     private String username;
     private String name;
     private String cpf;
-
     private String phone;
     private String password;
 
+    private PokerTable pokerTable;
+
+    public PokerTable getPokerTable() {
+        return pokerTable;
+    }
+
+    public void setPokerTable(PokerTable pokerTable) {
+        this.pokerTable = pokerTable;
+    }
 
     public Player(String username, String cpf, String phone, String password) {
         this.id = id;

@@ -12,6 +12,12 @@ public class AddPlayerInteractor {
     private PokerTableGateway pokerTableGateway;
     private PlayerGateway playerGateway;
 
+
+    public AddPlayerInteractor(PokerTableGateway pokerTableGateway, PlayerGateway playerGateway) {
+        this.pokerTableGateway = pokerTableGateway;
+        this.playerGateway = playerGateway;
+    }
+
     public PokerTable addPlayer(Long playerId, Long tableId) {
         Optional<Player> playerExists = this.playerGateway.findById(playerId);
         if(playerExists.isEmpty()) {
@@ -22,7 +28,11 @@ public class AddPlayerInteractor {
             throw new NotFoundException("Poker Table Id Invalid");
         }
         PokerTable pokerTable = pokerTableExists.get();
-        pokerTable.addPlayer(playerExists.get());
+        Player player = playerExists.get();
+//        pokerTable.addPlayer(player);
+        player.setPokerTable(pokerTable);
+        this.pokerTableGateway.save(pokerTable);
+        this.playerGateway.save(player);
         return pokerTable;
     }
 }

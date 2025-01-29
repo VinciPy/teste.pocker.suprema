@@ -1,8 +1,12 @@
 package org.suprema.infra.controllers;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class AddPlayerDTOValidation {
-    @NotBlank(message = "UserId is mandatory")
+    @NotNull(message = "UserId is mandatory")
     Long userId;
+
+    public Long getUserId() {
+        return userId;
+    }
 }

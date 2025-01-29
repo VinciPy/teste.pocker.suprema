@@ -10,6 +10,7 @@ import java.util.Optional;
 public class PokerTableRepositoryGateway implements PokerTableGateway {
     private PokerTableRepository pokerTableRepository;
     private PokerTableEntityMapper pokerTableEntityMapper;
+
     public PokerTableRepositoryGateway(PokerTableRepository pokerTableRepository) {
         this.pokerTableRepository = pokerTableRepository;
         this.pokerTableEntityMapper = new PokerTableEntityMapper(
@@ -28,5 +29,13 @@ public class PokerTableRepositoryGateway implements PokerTableGateway {
     public Optional<PokerTable> findById(Long id) {
         PokerTableModel pokerTableModel = this.pokerTableRepository.findById(id);
         return Optional.ofNullable(this.pokerTableEntityMapper.toDomain(pokerTableModel));
+    }
+
+    @Override
+    public PokerTable save(PokerTable pokerTable) {
+        PokerTableModel pokerTableModel = this.pokerTableEntityMapper.toModel(pokerTable);
+        this.pokerTableRepository.getEntityManager().merge(pokerTableModel);
+        PokerTableModel pokerTableSaved = this.pokerTableRepository.findById(pokerTable.getId());
+        return this.pokerTableEntityMapper.toDomain(pokerTableModel);
     }
 }
