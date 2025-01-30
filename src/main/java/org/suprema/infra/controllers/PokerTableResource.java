@@ -10,6 +10,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.suprema.application.usecases.AddPlayerToTable.AddPlayerInteractor;
 import org.suprema.application.usecases.CreatePlayer.PlayerGateway;
@@ -59,6 +60,13 @@ public class PokerTableResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
+    @Operation(summary = "Create a poker table", description = "Create a poker table with a name")
+    @APIResponse(
+            responseCode = "200",
+            description = "success",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON)
+    )
+    @Schema(implementation = CreatePokerTableResponse.class)
     @POST
     public Response create(PokerTableValidationDTO data) {
         Set<ConstraintViolation<PokerTableValidationDTO>> violations = validator.validate(data);
@@ -79,6 +87,12 @@ public class PokerTableResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     @Path("/{tableId}/players")
+    @Operation(summary = "Add player", description = "Add A Player to poker table with id specific")
+    @APIResponse(
+            responseCode = "200",
+            description = "success",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON)
+    )
     @POST
     public Response addPlayer(@PathParam("tableId") String tableId, AddPlayerDTOValidation data) {
         Set<ConstraintViolation<AddPlayerDTOValidation>> violations = validator.validate(data);
@@ -106,6 +120,7 @@ public class PokerTableResource {
             description = "success",
             content = @Content(mediaType = MediaType.APPLICATION_JSON)
     )
+    @Schema(implementation = PlayerWinnerReponse.class)
     @POST
     public Response calculateWinner(@PathParam("tableId") Long tableId) {
         Player playerWinner = this.simulateWinnerInteractor.calculateWinner(tableId);
