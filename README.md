@@ -1,66 +1,60 @@
-# com.suprema.pocker
+# Poker API - Teste de Desenvolvedor Back-End
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+![GitHub repo size](https://img.shields.io/github/repo-size/VinciPy/teste.pocker.suprema?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/VinciPy/teste.pocker.suprema?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/VinciPy/teste.pocker.suprema?style=for-the-badge)
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
-## Running the application in dev mode
+Bem-vindo ao repositório da Poker API! Este projeto foi desenvolvido como parte de um teste para a vaga de Desenvolvedor Back-End. A API simula funcionalidades básicas de um jogo de poker, incluindo autenticação de usuários, criação de mesas, adição de jogadores e simulação de um vencedor.
 
-You can run your application in dev mode that enables live coding using:
+## 🚀 Visão Geral
 
-```shell script
-./mvnw quarkus:dev
-```
+Este projeto é uma API desenvolvida em Java utilizando o framework Quarkus. Ele inclui autenticação JWT, persistência de dados, e é totalmente containerizado com Docker Compose. A documentação da API foi gerada com Swagger, e todos os endpoints estão devidamente protegidos e testados.
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+## 📋 Requisitos
 
-## Packaging and running the application
+- **Quarkus**: Framework utilizado para desenvolver a API.
+- **Persistência de Dados**: Utilização de um banco de dados nativo do Quarkus.
+- **Docker Compose**: Para subir a aplicação e o banco de dados.
+- **Autenticação JWT**: Proteção dos endpoints da API.
+- **Swagger**: Documentação da API.
+- **Testes Unitários**: Implementação de testes para garantir a qualidade do código.
 
-The application can be packaged using:
+## Endpoints da API
 
-```shell script
-./mvnw package
-```
+## Regras de Negócio
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+- Um usuário não pode ser adicionado duas vezes à mesma mesa.
+- Uma mesa deve ter no mínimo 3 jogadores para que um ganhador seja simulado.
+- Validação básica de dados como CPF e telefone.
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+## Como Executar o Projeto
 
-If you want to build an _über-jar_, execute the following command:
+### Pré-requisitos
 
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
+- Docker
+- Docker Compose
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+### 🔧 Passos para Execução
 
-## Creating a native executable
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/VinciPy/poker-api.git
+   ```
+2. Navegue ate o diretorio do projeto 
+    ```bash
+   cd poker-api
+   ```
+   
+3. Suba os containers com o comando: 
+    ```bash
+   docker-compose up --build 
+   ```
+4. Acesse a documentação da api:
+   http://localhost:8080/swagger-ui
 
-You can create a native executable using:
+## ✒️ Autores
 
-```shell script
-./mvnw package -Dnative
-```
+- **Vinicius Santana** - _Trabalho Inicial_ - (https://github.com/VinciPy)
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/com.suprema.pocker-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Related Guides
-
-- RESTEasy Classic ([guide](https://quarkus.io/guides/resteasy)): REST endpoint framework implementing Jakarta REST and more
-
-## Provided Code
-
-### RESTEasy JAX-RS
-
-Easily start your RESTful Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+   
