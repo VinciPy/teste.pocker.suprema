@@ -9,4 +9,5 @@ public interface PlayerGateway {
     Optional<Player> findById(Long id);
     Player linkPokerTable(Player player, Long pokerTableId);
     Player save(Player player);
+    Optional<Player> findByUsername(String username);
 }

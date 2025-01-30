@@ -8,6 +8,10 @@ import jakarta.validation.Validator;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.suprema.application.usecases.AddPlayerToTable.AddPlayerInteractor;
 import org.suprema.application.usecases.CreatePlayer.PlayerGateway;
 import org.suprema.application.usecases.CreatePokerTable.CreatePokerTableInteractor;
@@ -15,14 +19,17 @@ import org.suprema.application.usecases.CreatePokerTable.PokerTableGateway;
 import org.suprema.application.usecases.SimulateWinner.SimulateWinnerInteractor;
 import org.suprema.domain.entities.Player;
 import org.suprema.domain.entities.PokerTable;
+import org.suprema.infra.controllers.dto.PokerTableDTOMapper;
+import org.suprema.infra.controllers.response.CreatePokerTableResponse;
+import org.suprema.infra.controllers.response.PlayerWinnerReponse;
+import org.suprema.infra.controllers.response.Result;
 import org.suprema.infra.gateways.PlayerEntityMapper;
 import org.suprema.infra.gateways.PlayerRepositoryGateway;
 import org.suprema.infra.gateways.PokerTableRepositoryGateway;
-import org.suprema.infra.models.PokerTableModel;
 import org.suprema.infra.persistence.PlayerRepository;
 import org.suprema.infra.persistence.PokerTableRepository;
+import org.suprema.infra.validations.AddPlayerDTOValidation;
 import org.suprema.infra.validations.PokerTableValidationDTO;
-import org.suprema.infra.validations.UserValidationDTO;
 
 import java.util.Set;
 
@@ -56,6 +63,13 @@ public class PokerTableResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
+    @Operation(summary = "Create a poker table", description = "Create a poker table with a name")
+    @APIResponse(
+            responseCode = "200",
+            description = "success",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON)
+    )
+    @Schema(implementation = CreatePokerTableResponse.class)
     @POST
     public Response create(PokerTableValidationDTO data) {
         Set<ConstraintViolation<PokerTableValidationDTO>> violations = validator.validate(data);
@@ -76,17 +90,28 @@ public class PokerTableResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     @Path("/{tableId}/players")
+    @Operation(summary = "Add player", description = "Add A Player to poker table with id specific")
+    @APIResponse(
+            responseCode = "200",
+            description = "success",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON)
+    )
     @POST
     public Response addPlayer(@PathParam("tableId") String tableId, AddPlayerDTOValidation data) {
-        Set<ConstraintViolation<AddPlayerDTOValidation>> violations = validator.validate(data);
-        if (violations.isEmpty()) {
-            this.addPlayerInteractor.addPlayer(
-                 data.userId,
-                 Long.valueOf(tableId)
-            );
-            return Response.status(201).build();
-        } else {
-            Result result = new Result(violations);
+        try {
+            Set<ConstraintViolation<AddPlayerDTOValidation>> violations = validator.validate(data);
+            if (violations.isEmpty()) {
+                this.addPlayerInteractor.addPlayer(
+                        data.getUserId(),
+                        Long.valueOf(tableId)
+                );
+                return Response.status(201).build();
+            } else {
+                Result result = new Result(violations);
+                return Response.status(400).entity(result).build();
+            }
+        } catch (IllegalStateException e) {
+            Result result = new Result(e.getMessage());
             return Response.status(400).entity(result).build();
         }
     }
@@ -97,6 +122,13 @@ public class PokerTableResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     @Path("/{tableId}/winner")
+    @Operation(summary = "Calculate a winner", description = "Return an simulation of winner of table")
+    @APIResponse(
+            responseCode = "200",
+            description = "success",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON)
+    )
+    @Schema(implementation = PlayerWinnerReponse.class)
     @POST
     public Response calculateWinner(@PathParam("tableId") Long tableId) {
         Player playerWinner = this.simulateWinnerInteractor.calculateWinner(tableId);

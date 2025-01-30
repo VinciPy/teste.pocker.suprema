@@ -15,6 +15,9 @@ public class Player {
     }
 
     public void setPokerTable(PokerTable pokerTable) {
+        if (this.pokerTable != null) {
+           throw new IllegalStateException("User is already in Poker Table");
+        }
         this.pokerTable = pokerTable;
     }
 
@@ -74,4 +77,11 @@ public class Player {
         this.password = password;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return id == player.id;
+    }
 }

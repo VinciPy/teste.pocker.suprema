@@ -1,6 +1,5 @@
 package org.suprema.infra.controllers;
 
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
@@ -10,7 +9,14 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.suprema.application.usecases.CreatePlayer.CreatePlayerInteractor;
+import org.suprema.domain.entities.Player;
+import org.suprema.infra.controllers.dto.PlayerDTOMapper;
+import org.suprema.infra.controllers.response.Result;
 import org.suprema.infra.gateways.PlayerEntityMapper;
 import org.suprema.infra.gateways.PlayerRepositoryGateway;
 import org.suprema.infra.persistence.PlayerRepository;
@@ -36,15 +42,26 @@ public class UserResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @RolesAllowed("Admin")
+    @Operation(summary = "Create a player", description = "Player able to poker table")
+    @APIResponse(
+            responseCode = "200",
+            description = "success",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON)
+    )
+    @Schema(implementation = Result.class)
     @Transactional
     public Response create(UserValidationDTO player, @Context SecurityContext ctx) {
-        Set<ConstraintViolation<UserValidationDTO>> violations = validator.validate(player);
-        if (violations.isEmpty()) {
-            this.createPlayerInteractor.createPlayer(this.playerDTOMapper.toPlayerDomain(player));
-            return Response.status(201).build();
-        } else {
-            Result result = new Result(violations);
+        try {
+            Set<ConstraintViolation<UserValidationDTO>> violations = validator.validate(player);
+            if (violations.isEmpty()) {
+                Player playerResult = this.createPlayerInteractor.createPlayer(this.playerDTOMapper.toPlayerDomain(player));
+                return Response.status(201).entity(playerResult).build();
+            } else {
+                Result result = new Result(violations);
+                return Response.status(400).entity(result).build();
+            }
+        } catch (IllegalStateException e) {
+            Result result = new Result(e.getMessage());
             return Response.status(400).entity(result).build();
         }
     }

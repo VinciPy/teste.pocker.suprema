@@ -34,9 +34,9 @@ public class PlayerEntityMapper {
             playerModelEntity.getPassword()
         );
         player.setId(playerModelEntity.getId());
-//        if (playerModelEntity.getPokerTable() != null) {
-//            player.setPokerTable(this.pokerTableEntityMapper.toDomain(playerModelEntity.getPokerTable()));
-//        }
+        if (playerModelEntity.getPokerTable() != null) {
+            player.setPokerTable(this.pokerTableEntityMapper.toDomain(playerModelEntity.getPokerTable()));
+        }
         return player;
     }
 }

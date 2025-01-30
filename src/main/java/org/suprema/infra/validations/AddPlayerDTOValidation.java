@@ -1,4 +1,4 @@
-package org.suprema.infra.controllers;
+package org.suprema.infra.validations;
 
 import jakarta.validation.constraints.NotNull;
 

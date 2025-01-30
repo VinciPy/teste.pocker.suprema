@@ -1,4 +1,4 @@
-package org.suprema.infra.controllers;
+package org.suprema.infra.controllers.dto;
 
 import org.suprema.domain.entities.PokerTable;
 import org.suprema.infra.validations.PokerTableValidationDTO;
@@ -9,7 +9,7 @@ public class PokerTableDTOMapper {
     public PokerTable toPokerTableDomain(PokerTableValidationDTO pokerTableValidationDTO) {
         return new PokerTable(
                 pokerTableValidationDTO.getName(),
-                Collections.emptySet()
+                Collections.emptyList()
         );
     }
 }
