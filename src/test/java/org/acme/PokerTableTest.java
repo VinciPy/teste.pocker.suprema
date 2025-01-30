@@ -13,7 +13,7 @@ import java.util.Collections;
 @QuarkusTest
 public class PokerTableTest {
     @Test
-    @DisplayName("should be a instace of poker table")
+    @DisplayName("should be a instance of poker table")
     public void testPokerTableEntity() {
         PokerTable pokerTable = new PokerTable(
                 "test_1",
@@ -58,6 +58,45 @@ public class PokerTableTest {
         );
         pokerTable.addPlayer(player1);
         Assertions.assertFalse(pokerTable.isValidTable());
+    }
+
+    @Test
+    @DisplayName("Should be test of an calculate a valid winner")
+    public void testMethodValidateAnWinner() {
+        PokerTable pokerTable = new PokerTable(
+                "test_1",
+                new ArrayList<>()
+        );
+        Player player1 = new Player(
+                "player1",
+                "111.111.111.111-11",
+                "23423423",
+                "12345"
+        );
+        Player player2 = new Player(
+                "player1",
+                "111.111.111.111-11",
+                "23423423",
+                "12345"
+        );
+        Player player3 = new Player(
+                "player1",
+                "111.111.111.111-11",
+                "23423423",
+                "12345"
+        );
+        Player player4 = new Player(
+                "player1",
+                "111.111.111.111-11",
+                "23423423",
+                "12345"
+        );
+        pokerTable.addPlayer(player1);
+        pokerTable.addPlayer(player2);
+        pokerTable.addPlayer(player3);
+        pokerTable.addPlayer(player4);
+        Player winner = pokerTable.getWinner();
+        Assertions.assertEquals(winner.getClass(), Player.class);
     }
 
     @Test
