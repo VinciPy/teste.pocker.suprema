@@ -98,15 +98,20 @@ public class PokerTableResource {
     )
     @POST
     public Response addPlayer(@PathParam("tableId") String tableId, AddPlayerDTOValidation data) {
-        Set<ConstraintViolation<AddPlayerDTOValidation>> violations = validator.validate(data);
-        if (violations.isEmpty()) {
-            this.addPlayerInteractor.addPlayer(
-                 data.getUserId(),
-                 Long.valueOf(tableId)
-            );
-            return Response.status(201).build();
-        } else {
-            Result result = new Result(violations);
+        try {
+            Set<ConstraintViolation<AddPlayerDTOValidation>> violations = validator.validate(data);
+            if (violations.isEmpty()) {
+                this.addPlayerInteractor.addPlayer(
+                        data.getUserId(),
+                        Long.valueOf(tableId)
+                );
+                return Response.status(201).build();
+            } else {
+                Result result = new Result(violations);
+                return Response.status(400).entity(result).build();
+            }
+        } catch (IllegalStateException e) {
+            Result result = new Result(e.getMessage());
             return Response.status(400).entity(result).build();
         }
     }

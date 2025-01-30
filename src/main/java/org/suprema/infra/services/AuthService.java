@@ -4,6 +4,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.suprema.domain.entities.Player;
 import org.suprema.infra.gateways.PlayerRepositoryGateway;
 
+import java.util.Optional;
+
 public class AuthService {
     private final PlayerRepositoryGateway playerRepositoryGateway;
 
@@ -12,9 +14,13 @@ public class AuthService {
     }
 
     public boolean validateUser(String username, String plainPassword) {
-        Player user = this.playerRepositoryGateway.findByUsername(username);
-        String passwordHashed = user.getPassword();
-        boolean passwordValid = BCrypt.checkpw(plainPassword, passwordHashed);
-        return passwordValid;
+        Optional<Player> userExists = this.playerRepositoryGateway.findByUsername(username);
+        if (userExists.isPresent()) {
+            Player user = userExists.get();
+            String passwordHashed = user.getPassword();
+            boolean passwordValid = BCrypt.checkpw(plainPassword, passwordHashed);
+            return passwordValid;
+        }
+        return false;
     }
 }

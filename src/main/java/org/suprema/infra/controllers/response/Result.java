@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class Result {
 
     public Result(String message) {
-        this.success = true;
+        this.success = false;
         this.message = message;
     }
 

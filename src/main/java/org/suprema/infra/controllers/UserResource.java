@@ -14,6 +14,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.suprema.application.usecases.CreatePlayer.CreatePlayerInteractor;
+import org.suprema.domain.entities.Player;
 import org.suprema.infra.controllers.dto.PlayerDTOMapper;
 import org.suprema.infra.controllers.response.Result;
 import org.suprema.infra.gateways.PlayerEntityMapper;
@@ -50,12 +51,17 @@ public class UserResource {
     @Schema(implementation = Result.class)
     @Transactional
     public Response create(UserValidationDTO player, @Context SecurityContext ctx) {
-        Set<ConstraintViolation<UserValidationDTO>> violations = validator.validate(player);
-        if (violations.isEmpty()) {
-            this.createPlayerInteractor.createPlayer(this.playerDTOMapper.toPlayerDomain(player));
-            return Response.status(201).build();
-        } else {
-            Result result = new Result(violations);
+        try {
+            Set<ConstraintViolation<UserValidationDTO>> violations = validator.validate(player);
+            if (violations.isEmpty()) {
+                Player playerResult = this.createPlayerInteractor.createPlayer(this.playerDTOMapper.toPlayerDomain(player));
+                return Response.status(201).entity(playerResult).build();
+            } else {
+                Result result = new Result(violations);
+                return Response.status(400).entity(result).build();
+            }
+        } catch (IllegalStateException e) {
+            Result result = new Result(e.getMessage());
             return Response.status(400).entity(result).build();
         }
     }

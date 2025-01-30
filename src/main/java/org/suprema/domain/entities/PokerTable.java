@@ -40,6 +40,10 @@ public class PokerTable {
         if (players.size() >= 8) {
             return false;
         }
+        boolean playerAlreadyExists = players.contains(player);
+        if (playerAlreadyExists) {
+            throw new IllegalStateException("Player already in the tabe");
+        }
         return this.players.add(player);
     }
 

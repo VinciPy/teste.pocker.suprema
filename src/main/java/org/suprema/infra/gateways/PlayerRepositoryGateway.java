@@ -48,12 +48,12 @@ public class PlayerRepositoryGateway implements PlayerGateway {
     }
 
     @Override
-    public Player findByUsername(String username) {
-        PlayerModel playerExits = this.playerRepository.find("username", username).firstResult();
-        if (playerExits == null) {
-            throw new NotFoundException();
+    public Optional<Player> findByUsername(String username) {
+        Optional<PlayerModel> playerExits = this.playerRepository.find("username", username).firstResultOptional();
+        if (playerExits.isPresent()){
+            return Optional.of(this.playerEntityMapper.toDomain(playerExits.get()));
         }
-        return this.playerEntityMapper.toDomain(playerExits);
+        return Optional.empty();
     }
 
 
