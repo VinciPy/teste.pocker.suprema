@@ -1,13 +1,13 @@
 package org.suprema.domain.entities;
 
-import java.util.Set;
+import java.util.List;
 
 public class PokerTable {
     private Long id;
     private String name;
-    private Set<Player> players;
+    private List<Player> players;
 
-    public PokerTable(String name, Set<Player> players) {
+    public PokerTable(String name, List<Player> players) {
         this.name = name;
         this.players = players;
     }
@@ -28,11 +28,11 @@ public class PokerTable {
         this.name = name;
     }
 
-    public Set<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(Set<Player> players) {
+    public void setPlayers(List<Player> players) {
         this.players = players;
     }
 
@@ -40,7 +40,7 @@ public class PokerTable {
         if (players.size() >= 8) {
             return false;
         }
-        return players.add(player);
+        return this.players.add(player);
     }
 
     public boolean isValidTable() {

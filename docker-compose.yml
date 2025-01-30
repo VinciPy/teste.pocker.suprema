@@ -6,7 +6,7 @@ services:
     image: postgres:13
     container_name: postgres-container
     environment:
-      POSTGRES_DB: quarkusdb
+      POSTGRES_DB: suprema
       POSTGRES_USER: quarkususer
       POSTGRES_PASSWORD: quarkuspassword
     ports:

@@ -17,10 +17,10 @@ public class PokerTableEntityMapper {
     }
 
     public PokerTable toDomain(PokerTableModel pokerTableModel) {
-        Set<Player> players = pokerTableModel.getPlayers()
+        List<Player> players = pokerTableModel.getPlayers()
                 .stream()
                 .map(player -> this.playerEntityMapper.toDomain(player))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
         PokerTable pokerTable = new PokerTable(
                 pokerTableModel.getName(),
                 players
