@@ -1,4 +1,4 @@
-package org.suprema.infra.controllers;
+package org.suprema.infra.controllers.dto;
 
 public class AuthDTO {
         private String username;

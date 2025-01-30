@@ -1,4 +1,4 @@
-package org.suprema.infra.controllers;
+package org.suprema.infra.controllers.dto;
 
 import org.suprema.domain.entities.PokerTable;
 import org.suprema.infra.validations.PokerTableValidationDTO;

@@ -1,1 +1,8 @@
 org/suprema/infra/services/AuthService.class
+org/suprema/infra/controllers/dto/PlayerDTOMapper.class
+org/suprema/infra/controllers/dto/PokerTableDTOMapper.class
+org/suprema/infra/controllers/response/Result.class
+org/suprema/infra/validations/AddPlayerDTOValidation.class
+org/suprema/infra/controllers/dto/AuthDTO.class
+org/suprema/infra/controllers/response/PlayerWinnerReponse.class
+org/suprema/infra/controllers/response/CreatePokerTableResponse.class

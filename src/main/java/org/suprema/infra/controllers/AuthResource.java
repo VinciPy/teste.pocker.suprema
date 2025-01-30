@@ -6,14 +6,14 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
-import org.eclipse.microprofile.jwt.Claims;
 import org.suprema.constants.JWTIssuer;
+import org.suprema.infra.controllers.dto.AuthDTO;
+import org.suprema.infra.controllers.response.Result;
 import org.suprema.infra.gateways.PlayerEntityMapper;
 import org.suprema.infra.gateways.PlayerRepositoryGateway;
 import org.suprema.infra.persistence.PlayerRepository;
 import org.suprema.infra.services.AuthService;
 
-import java.security.Key;
 import java.util.Arrays;
 import java.util.HashSet;
 

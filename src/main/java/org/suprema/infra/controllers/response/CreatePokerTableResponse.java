@@ -1,4 +1,4 @@
-package org.suprema.infra.controllers;
+package org.suprema.infra.controllers.response;
 
 public class CreatePokerTableResponse {
     private String tableId;

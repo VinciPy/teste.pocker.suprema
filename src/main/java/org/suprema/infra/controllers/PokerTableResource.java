@@ -19,14 +19,17 @@ import org.suprema.application.usecases.CreatePokerTable.PokerTableGateway;
 import org.suprema.application.usecases.SimulateWinner.SimulateWinnerInteractor;
 import org.suprema.domain.entities.Player;
 import org.suprema.domain.entities.PokerTable;
+import org.suprema.infra.controllers.dto.PokerTableDTOMapper;
+import org.suprema.infra.controllers.response.CreatePokerTableResponse;
+import org.suprema.infra.controllers.response.PlayerWinnerReponse;
+import org.suprema.infra.controllers.response.Result;
 import org.suprema.infra.gateways.PlayerEntityMapper;
 import org.suprema.infra.gateways.PlayerRepositoryGateway;
 import org.suprema.infra.gateways.PokerTableRepositoryGateway;
-import org.suprema.infra.models.PokerTableModel;
 import org.suprema.infra.persistence.PlayerRepository;
 import org.suprema.infra.persistence.PokerTableRepository;
+import org.suprema.infra.validations.AddPlayerDTOValidation;
 import org.suprema.infra.validations.PokerTableValidationDTO;
-import org.suprema.infra.validations.UserValidationDTO;
 
 import java.util.Set;
 
@@ -98,7 +101,7 @@ public class PokerTableResource {
         Set<ConstraintViolation<AddPlayerDTOValidation>> violations = validator.validate(data);
         if (violations.isEmpty()) {
             this.addPlayerInteractor.addPlayer(
-                 data.userId,
+                 data.getUserId(),
                  Long.valueOf(tableId)
             );
             return Response.status(201).build();

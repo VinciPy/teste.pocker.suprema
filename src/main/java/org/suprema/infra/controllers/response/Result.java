@@ -1,4 +1,4 @@
-package org.suprema.infra.controllers;
+package org.suprema.infra.controllers.response;
 
 import jakarta.validation.ConstraintViolation;
 import java.util.Set;
@@ -6,12 +6,12 @@ import java.util.stream.Collectors;
 
 public class Result {
 
-    Result(String message) {
+    public Result(String message) {
         this.success = true;
         this.message = message;
     }
 
-    Result(Set<? extends ConstraintViolation<?>> violations) {
+    public Result(Set<? extends ConstraintViolation<?>> violations) {
         this.success = false;
         this.message = violations.stream()
                 .map(cv -> cv.getMessage())
