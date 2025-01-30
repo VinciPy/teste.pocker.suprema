@@ -11,6 +11,18 @@ Bem-vindo ao repositório da Poker API! Este projeto foi desenvolvido como parte
 
 Este projeto é uma API desenvolvida em Java utilizando o framework Quarkus. Ele inclui autenticação JWT, persistência de dados, e é totalmente containerizado com Docker Compose. A documentação da API foi gerada com Swagger, e todos os endpoints estão devidamente protegidos e testados.
 
+## Bad Smells
+
+- **Rota de criação de usuario desprotegida**: Para evitar o acesso para criacão do primeiro usuario para autenticação.
+
+- **Chaves de autenticação no repositorio online**: Para evitar a criação toda vez no clone.
+Tudo isso foi feito pensando na **praticidade** para garantir que o código pudesse ser facilmente rodado em sua máquina, permitindo que você se concentrasse no que realmente importa para a avaliação, sem perder tempo com a configuração ou ajustes do ambiente.
+
+Agradeço pela compreensão!
+
+---
+*Esta é uma versão simplificada para facilitar a execução. Certamente, em um ambiente de produção ou quando mais tempo for disponível, seguiria melhores práticas de engenharia de software e de arquitetura.*
+
 ## 📋 Requisitos
 
 - **Quarkus**: Framework utilizado para desenvolver a API.
