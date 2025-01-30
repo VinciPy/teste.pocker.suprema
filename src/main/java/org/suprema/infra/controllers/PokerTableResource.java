@@ -8,6 +8,9 @@ import jakarta.validation.Validator;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.suprema.application.usecases.AddPlayerToTable.AddPlayerInteractor;
 import org.suprema.application.usecases.CreatePlayer.PlayerGateway;
 import org.suprema.application.usecases.CreatePokerTable.CreatePokerTableInteractor;
@@ -97,6 +100,12 @@ public class PokerTableResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     @Path("/{tableId}/winner")
+    @Operation(summary = "Calculate a winner", description = "Return an simulation of winner of table")
+    @APIResponse(
+            responseCode = "200",
+            description = "success",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON)
+    )
     @POST
     public Response calculateWinner(@PathParam("tableId") Long tableId) {
         Player playerWinner = this.simulateWinnerInteractor.calculateWinner(tableId);

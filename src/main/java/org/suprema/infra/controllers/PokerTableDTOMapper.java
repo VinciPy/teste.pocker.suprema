@@ -9,7 +9,7 @@ public class PokerTableDTOMapper {
     public PokerTable toPokerTableDomain(PokerTableValidationDTO pokerTableValidationDTO) {
         return new PokerTable(
                 pokerTableValidationDTO.getName(),
-                Collections.emptySet()
+                Collections.emptyList()
         );
     }
 }
