@@ -20,7 +20,7 @@ public class PlayerModel {
     private String phone;
     private String password;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "poker_table_id")
     private PokerTableModel pokerTable;
 
@@ -35,9 +35,12 @@ public class PlayerModel {
 
     }
 
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id){
+        this.id = id;
     }
 
     public String getUsername() {
@@ -54,5 +57,13 @@ public class PlayerModel {
 
     public String getPassword() {
         return password;
+    }
+
+    public PokerTableModel getPokerTable() {
+        return pokerTable;
+    }
+
+    public void setPokerTable(PokerTableModel pokerTable) {
+        this.pokerTable = pokerTable;
     }
 }

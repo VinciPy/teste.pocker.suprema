@@ -1,13 +1,14 @@
 package org.suprema.domain.entities;
 
-import java.util.Set;
+import java.util.List;
 
 public class PokerTable {
     private Long id;
     private String name;
-    private Set<Player> players;
+    private List<Player> players;
 
-    public PokerTable() {
+    public PokerTable(String name, List<Player> players) {
+        this.name = name;
         this.players = players;
     }
 
@@ -27,23 +28,21 @@ public class PokerTable {
         this.name = name;
     }
 
-    public Set<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(Set<Player> players) {
+    public void setPlayers(List<Player> players) {
         this.players = players;
     }
 
-    // Método para adicionar um jogador à mesa
     public boolean addPlayer(Player player) {
         if (players.size() >= 8) {
-            return false; // Mesa já cheia
+            return false;
         }
-        return players.add(player);
+        return this.players.add(player);
     }
 
-    // Verifica se a mesa tem no mínimo 3 jogadores
     public boolean isValidTable() {
         return players.size() >= 3;
     }
