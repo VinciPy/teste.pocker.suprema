@@ -1,5 +1,6 @@
 package org.suprema.infra.gateways;
 
+import jakarta.ws.rs.NotFoundException;
 import org.suprema.application.usecases.CreatePlayer.PlayerGateway;
 import org.suprema.domain.entities.Player;
 import org.suprema.infra.models.PlayerModel;
@@ -10,7 +11,6 @@ import java.util.Optional;
 public class PlayerRepositoryGateway implements PlayerGateway {
     private final PlayerRepository playerRepository;
     private final PlayerEntityMapper playerEntityMapper;
-
     private final PokerTableEntityMapper pokerTableEntityMapper;
 
     public PlayerRepositoryGateway(PlayerRepository playerRepository, PlayerEntityMapper playerEntityMapper) {
@@ -46,4 +46,15 @@ public class PlayerRepositoryGateway implements PlayerGateway {
         this.playerRepository.persist(playerSaved);
         return this.playerEntityMapper.toDomain(playerSaved);
     }
+
+    @Override
+    public Player findByUsername(String username) {
+        PlayerModel playerExits = this.playerRepository.find("username", username).firstResult();
+        if (playerExits == null) {
+            throw new NotFoundException();
+        }
+        return this.playerEntityMapper.toDomain(playerExits);
+    }
+
+
 }

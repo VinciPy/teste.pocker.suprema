@@ -40,7 +40,6 @@ public class UserResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @RolesAllowed("Admin")
     @Operation(summary = "Create a player", description = "Player able to poker table")
     @APIResponse(
             responseCode = "200",

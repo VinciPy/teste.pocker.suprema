@@ -25,5 +25,7 @@
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/infra/models/PokerTableModel.java
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/infra/persistence/PlayerRepository.java
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/infra/persistence/PokerTableRepository.java
+/home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/infra/services/AuthService.java
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/infra/validations/PokerTableValidationDTO.java
 /home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/infra/validations/UserValidationDTO.java
+/home/vinci/Documentos/suprema/teste.pocker.suprema/src/main/java/org/suprema/package-info.java
